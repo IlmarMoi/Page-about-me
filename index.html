@@ -1,0 +1,146 @@
+<!DOCTYPE <html>
+
+<html lang="en">
+
+    <head>
+
+        <title></title>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="css/style.css" rel="stylesheet">
+
+    </head>
+
+<style>
+
+a { 
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    position: relative;
+    top: -90px;
+    margin-left: 20px;
+    display: inline-block;
+}
+
+a2 {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    position: relative;
+    top: 500px;
+    left: 350px;
+    display: inline-block;
+}
+
+.image1 {
+    position: fixed;
+    align-items: center;
+    left: 1100px;
+    top: 400px;
+}
+
+.volume-control {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 200px;
+    height: 6px;
+    background: #333;
+    outline: none;
+    border-radius: 3px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    background: #ccc;
+    transform: scale(1.1);
+}
+
+.volume-icon {
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.volume-icon:hover {
+    color: #ccc;
+}
+
+</style>
+
+    <body style="background-color: black;">
+
+    <img src="Avatar.png" width="300" height="300">
+
+    <a>Name: Ilmar<br>Location: Estonia<br>Age: 17<br>Interest: Computers, Armored Vehicles, Shawarmas<br>Religion: Christian</a>
+
+<image src ="Kessu.jpg" width="400" height="300" style="position: relative; left: 800px; top: 800px;">
+
+    <a2> This is my dog Kessu: </a2>
+
+    <div class="image1">
+
+        <image src="Planeet.gif" width="400" height="400"></image>
+
+    </div>
+
+    <audio id="bgAudio" src="Audio.mp3" loop autoplay></audio>
+
+    <div class="volume-control">
+
+        <span class="volume-icon" onclick="toggleMute()">🔊</span>
+        <input type="range" class="volume-slider" min="0" max="100" value="100" oninput="updateVolume(this.value)">
+
+    </div>
+
+    <script>
+        const audio = document.getElementById('bgAudio');
+        const volumeIcon = document.querySelector('.volume-icon');
+        let lastVolume = 1;
+
+        function updateVolume(value) {
+            const vol = value / 100;
+            audio.volume = vol;
+            volumeIcon.textContent = vol === 0 ? '🔇' : vol < 0.5 ? '🔉' : '🔊';
+            lastVolume = vol > 0 ? vol : lastVolume;
+        }
+
+        document.addEventListener('click', function initAudio() {
+            audio.play().catch(console.log);
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+    </script>
+
+</body>
+
+</html>
